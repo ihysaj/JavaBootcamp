@@ -8,15 +8,15 @@ import javax.persistence.Table;
 @Table(name = "COUNTRY")
 public class Country {
     @Id
-    private String code;
+    private String id;
     private String description;
 
-    public String getCode() {
-        return code;
+    public String getId() {
+        return id;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getDescription() {

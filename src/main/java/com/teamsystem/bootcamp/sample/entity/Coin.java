@@ -1,15 +1,16 @@
 package com.teamsystem.bootcamp.sample.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "COIN")
 public class Coin {
     @Id
     private long id;
-    private String country;
+    @ManyToOne
+    private Country country;
+/*
+    private String countryId;*/
     private String value;
 
     public long getId() {
@@ -27,18 +28,18 @@ public class Coin {
     public void setValue(String value) {
         this.value = value;
     }
-
-    public String getCountry() {
-        return country;
+/*
+    public String getCountryId() {
+        return countryId;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
+    public void setCountryId(String countryId) {
+        this.countryId = countryId;
+    }*/
 
     @Override
     public String toString () {
-        return country + " " + value;
+        return country.getDescription() + " " + country.getId() + " " + value;
     }
 
 }

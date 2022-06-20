@@ -16,5 +16,13 @@ public class VendingMachineServiceTest {
     @Test
     public void test() {
         System.out.println(vendingMachineService.getAllByCountry("IT"));
+        System.out.println(vendingMachineService.getAllByCountry("AL"));
+        System.out.println(vendingMachineService.countAllByCountry("IT"));
+        System.out.println(vendingMachineService.countAllByCountry("AL"));
+
+        System.out.println(vendingMachineService.nativeCountAllByCountry("IT"));
+        System.out.println(vendingMachineService.nativeCountAllByCountry("AL"));
+
+        System.out.println(vendingMachineService.getCountryWithMaxNumberOfCoins());
     }
 }

@@ -17,6 +17,18 @@ public class VendingMachineService {
     }
 
     public List<Coin> getAllByCountry(String countryCode) {
-        return coinRepository.findAllByCountry(countryCode);
+        return coinRepository.findAllByCountryId(countryCode);
+    }
+
+    public Integer countAllByCountry(String countryCode) {
+        return coinRepository.countAllByCountryId(countryCode);
+    }
+
+    public Integer nativeCountAllByCountry(String countryCode) {
+        return coinRepository.nativeCountAllByCountryId(countryCode);
+    }
+
+    public String getCountryWithMaxNumberOfCoins() {
+        return coinRepository.getCountryWithMaxNumberOfCoins();
     }
 }
