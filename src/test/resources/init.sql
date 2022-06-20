@@ -4,6 +4,20 @@ create table coin(
     value   numeric(10, 4) not null
 );
 
+create table country(
+     code       varchar(2)     primary key not null,
+     description   varchar(50) not null
+);
+
+ALTER TABLE COIN
+    ADD constraint country_fkey foreign key(country) REFERENCES country(code) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+INSERT INTO public.country (code, description) VALUES ('IT', 'Italy');
+INSERT INTO public.country (code, description) VALUES ('US', 'United States');
+INSERT INTO public.country (code, description) VALUES ('AL', 'Albania');
+
+
 INSERT INTO public.coin (id, country, value) VALUES (1, 'IT', 0.0100);
 INSERT INTO public.coin (id, country, value) VALUES (2, 'IT', 0.0200);
 INSERT INTO public.coin (id, country, value) VALUES (3, 'IT', 0.0500);
