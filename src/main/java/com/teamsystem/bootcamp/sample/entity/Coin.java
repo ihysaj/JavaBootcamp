@@ -1,6 +1,7 @@
 package com.teamsystem.bootcamp.sample.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "COIN")
@@ -11,7 +12,7 @@ public class Coin {
     private Country country;
 /*
     private String countryId;*/
-    private String value;
+    private BigDecimal value;
 
     public long getId() {
         return id;
@@ -21,11 +22,11 @@ public class Coin {
         this.id = id;
     }
 
-    public String getValue() {
+    public BigDecimal getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(BigDecimal value) {
         this.value = value;
     }
 /*
