@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -38,24 +35,26 @@ public class VendingMachineService {
         return coinRepository.getCountryWithMaxNumberOfCoins();
     }
 
-    public List<Double> getChange(String countryCode, Double toPay, Double paid)  {
-        List<BigDecimal> coins = getAllByCountry(countryCode)
+    public List<Double> getChange(String country, double toPay, double paid) {
+        //List<Double> coins = Arrays.asList(2.0, 1.0, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01);
+
+        List<BigDecimal> coins = coinRepository.findAllByCountryId(country)
                 .stream()
                 .sorted(Comparator.comparing(Coin::getValue).reversed())
-                .map(Coin::getValue).toList();
+                .map(it -> it.getValue()).toList();
 
-        Optional<BigDecimal> coinFound = coins.stream()
-                .filter(it -> it.compareTo(BigDecimal.valueOf(paid).subtract(BigDecimal.valueOf(toPay))) <= 0)
-                .findFirst();
-
-        if (coinFound.isEmpty())
-            return List.of();
-        else {
-            return Stream.concat(
-                        Stream.of(coinFound.get().doubleValue()),
-                        getChange(countryCode, toPay + coinFound.get().doubleValue(), paid).stream()
-                    )
-                    .collect(Collectors.toList());
-        }
+        List<Double> changes = new ArrayList<Double>();
+        BigDecimal difference = BigDecimal.valueOf(paid).subtract(BigDecimal.valueOf(toPay));
+        for (BigDecimal coin : coins) {
+                // keep adding the current coin until it's more than the difference
+                while (difference.compareTo(coin) >= 0) { //>=
+                    changes.add(coin.doubleValue());
+                    difference = difference.subtract(coin);
+                }
+            }
+        return changes;
     }
-}
+
+
+
+    }

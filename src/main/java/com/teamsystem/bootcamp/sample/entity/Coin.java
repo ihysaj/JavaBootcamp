@@ -10,8 +10,6 @@ public class Coin {
     private long id;
     @ManyToOne
     private Country country;
-/*
-    private String countryId;*/
     private BigDecimal value;
 
     public long getId() {
@@ -29,14 +27,6 @@ public class Coin {
     public void setValue(BigDecimal value) {
         this.value = value;
     }
-/*
-    public String getCountryId() {
-        return countryId;
-    }
-
-    public void setCountryId(String countryId) {
-        this.countryId = countryId;
-    }*/
 
     @Override
     public String toString () {
